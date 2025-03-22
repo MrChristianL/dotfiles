@@ -1,0 +1,7 @@
+--- 
+- name: "Install NvChad"
+  ansible.builtin.git:
+    repo: https://github.com/NvChad/starter
+    dest: ~/.config/nvim
+  become: no
+

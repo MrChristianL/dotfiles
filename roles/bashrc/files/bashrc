@@ -136,3 +136,5 @@ fi
 # -- USER DEFINED ALIAS
 alias python="python3"
 alias vim="nvim"
+export PATH=/usr/local/bin:$PATH
+

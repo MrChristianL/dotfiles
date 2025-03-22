@@ -1,0 +1,5 @@
+---
+nvim_version: "0.10.4"
+nvim_appimage_url: "https://github.com/neovim/neovim/releases/download/v{{ nvim_version }}/nvim-linux-x86_64.appimage"
+nvim_install_path: "/usr/local/bin/nvim"
+

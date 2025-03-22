@@ -1,0 +1,36 @@
+---
+- name: Ensure dependencies are installed
+  become: true
+  ansible.builtin.apt:
+    name: curl
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Download Neovim AppImage
+  ansible.builtin.get_url:
+    url: "{{ nvim_appimage_url }}"
+    dest: "/tmp/nvim-linux-x86_64.appimage"
+    mode: "0755"
+
+- name: Make Neovim AppImage executable
+  ansible.builtin.file:
+    path: "/tmp/nvim-linux-x86_64.appimage"
+    mode: "0755"
+
+- name: Move Neovim AppImage to /usr/local/bin
+  become: true
+  ansible.builtin.copy:
+    src: "/tmp/nvim-linux-x86_64.appimage"
+    dest: "{{ nvim_install_path }}"
+    remote_src: yes
+    mode: "0755"
+
+- name: Verify Neovim installation
+  ansible.builtin.command: "{{ nvim_install_path }} --version"
+  register: nvim_version_output
+  changed_when: false
+
+- name: Display installed Neovim version
+  ansible.builtin.debug:
+    msg: "{{ nvim_version_output.stdout }}"
+
