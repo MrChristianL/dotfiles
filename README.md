@@ -1,6 +1,19 @@
-STILL TO DO:
-- fix Alacritty if you're still going to use it -- it was completely uninstalled because the config file wasn't loading and the only way to get the latest version (still didn't seem to work with the config file) was through Snapd. 
-- Look into alternatives, like kitty or WezTerm
-- whatever you choose, add it to the Ansible files, including the customizations you want in a terminal/files dir
+# ANSIBLE PLAYBOOK:
+---
 
-- have made only tmux and installed nerd font, haven't done anything with vim, vscode, or anything additional
+Setup VM via Ansible Playbook:
+
+1. Install Ansible
+> sudo apt install ansible
+
+2. Run setup playbook, -K for sudo power
+> ansible-playbook setup.yml -K
+
+---
+
+Tools,settings, and files:
+
+| Alacritty
+| Tmux
+| JetBrainsMono Nerd Font
+| IppSec HTB ParrotOS Toolset
