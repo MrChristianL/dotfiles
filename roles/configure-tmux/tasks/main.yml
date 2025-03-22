@@ -1,0 +1,41 @@
+---
+- name: "Install Tmux"
+  ansible.builtin.apt: 
+    name: 
+      - tmux
+      - xclip
+    state: present
+  become: yes
+
+- name: "Copying Tmux Config"
+  copy:
+    src: "{{ role_path }}/files/tmux.conf"
+    dest: "{{ ansible_env.HOME}}/.config/tmux/"
+
+- name: "Install TPM for tmux"
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+  become: no
+
+- name: "Install Power Theme (git)"
+  ansible.builtin.git:
+    repo: https://github.com/wfxr/tmux-power.git
+    dest: ~/.config/tmux/plugins/power/
+  become: no
+
+- name: "Install tmux plugins"
+  ansible.builtin.shell: |
+    tmux -f /home/christian/.config/tmux/tmux.conf start-server \; source-file /home/christian/.config/tmux/tmux.conf \; run-shell /home/christian/.tmux/plugins/tpm/bin/install_plugins
+  become: no
+  register: tpm_install
+  changed_when: tpm_install.rc == 0
+
+- name: "Verify tmux config loads"
+  ansible.builtin.shell: |
+    tmux start-server && tmux new-session -d -s ansible_setup || true
+    tmux source-file {{ ansible_env.HOME }}/.config/tmux/tmux.conf
+    tmux kill-session -t ansible_setup || true
+  become: no
+  register: tmux_source
+  failed_when: tmux_source.rc != 0

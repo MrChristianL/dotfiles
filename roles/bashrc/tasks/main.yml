@@ -1,0 +1,20 @@
+---
+- name: "Checking for backup .bashrc file"
+  file:
+    path: "{{ ansible_env.HOME }}/.bashrc_backup"
+    state: directory
+    mode: '0755'
+
+- name: "Backup existing .bashrc"
+  copy:
+    src: "{{ ansible_env.HOME }}/.bashrc"
+    dest: "{{ ansible_env.HOME }}/.bashrc_backup/bashrc_{{ ansible_date_time.iso8601 }}"
+    remote_src: yes
+    mode: '0644'
+  ignore_errors: yes  # In case .bashrc doesn't exist
+
+- name: "Copying new .bashrc from files directory"
+  copy:
+    src: "{{ role_path }}/files/bashrc"
+    dest: "{{ ansible_env.HOME }}/.bashrc"
+    mode: '0644'

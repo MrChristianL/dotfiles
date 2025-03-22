@@ -1,0 +1,14 @@
+- name: "Installing Packages"
+  package:
+    name:
+      - flameshot
+      - rsyslog
+    state: latest
+  become: true
+  become_method: sudo
+
+- name: "Ensure Ansible Docker Collection is Installed"
+  ansible.builtin.command: ansible-galaxy collection install community.docker
+  delegate_to: localhost
+  run_once: true
+

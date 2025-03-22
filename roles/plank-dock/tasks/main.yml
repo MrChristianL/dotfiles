@@ -1,0 +1,25 @@
+---
+- name: Install Plank
+  ansible.builtin.apt:
+    name: plank
+    state: present
+  become: yes
+
+- name: Ensure Plank launchers directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/plank/dock1/launchers"
+    state: directory
+    mode: '0755'
+
+- name: Populate Plank dock with applications
+  ansible.builtin.template:
+    src: dockitem.j2
+    dest: "{{ ansible_user_dir }}/.config/plank/dock1/launchers/{{ item }}.dockitem"
+    mode: '0644'
+  loop: "{{ plank_apps }}"
+
+- name: Ensure Plank is running
+  ansible.builtin.shell: |
+    pgrep plank || plank &
+  args:
+    executable: /bin/bash

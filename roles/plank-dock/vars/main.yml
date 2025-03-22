@@ -1,0 +1,5 @@
+---
+plank_apps:
+  - firefox-esr
+  - alacritty
+  - org.flameshot.Flameshot

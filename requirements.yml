@@ -1,0 +1,3 @@
+- src: gantsign.visual-studio-code
+  collections:
+    - name: community.docker

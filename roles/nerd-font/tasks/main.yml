@@ -1,0 +1,35 @@
+---
+- name: Installing JetBrains Mono Font
+  block:
+
+    # Ensure system-wide fonts directory exists
+    - file:
+        path: "/usr/share/fonts/JetBrainsMono"
+        state: directory
+        mode: '0755'
+      become: yes
+
+    # Install JetBrains Mono Font via apt and Nerd Font from GitHub
+    - block:
+        - apt:
+            name: fonts-jetbrains-mono
+            state: present
+            update_cache: yes
+          become: yes
+
+        - get_url:
+            url: https://github.com/ryanoasis/nerd-fonts/releases/download/v2.2.2/JetBrainsMono.zip
+            dest: "/usr/share/fonts/JetBrainsMono.zip"
+            mode: '0644'
+          become: yes
+
+        - unarchive:
+            src: "/usr/share/fonts/JetBrainsMono.zip"
+            dest: "/usr/share/fonts/"
+            remote_src: yes
+          become: yes
+
+    # Refresh font cache
+    - command: fc-cache -fv
+      become: yes
+
