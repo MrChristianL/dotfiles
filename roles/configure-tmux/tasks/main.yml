@@ -15,13 +15,13 @@
 - name: "Install TPM for tmux"
   ansible.builtin.git:
     repo: https://github.com/tmux-plugins/tpm
-    dest: {{ ansible_env.HOME}}/.config/tmux//plugins/tpm
+    dest: "{{ ansible_env.HOME}}/.config/tmux//plugins/tpm"
   become: no
 
 - name: "Install Power Theme (git)"
   ansible.builtin.git:
     repo: https://github.com/wfxr/tmux-power.git
-    dest: {{ ansible_env.HOME}}/.config/tmux/plugins/power/
+    dest: "{{ ansible_env.HOME}}/.config/tmux/plugins/power/"
   become: no
 
 - name: "Install tmux plugins"
