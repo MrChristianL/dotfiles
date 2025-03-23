@@ -6,7 +6,10 @@ Setup VM via Ansible Playbook:
 1. Install Ansible
 > sudo apt install ansible
 
-2. Run setup playbook, -K for sudo power
+2. Run requirements.yml
+> ansible-galaxy collection install -r requirements.yml
+
+3. Run setup playbook, -K for sudo power
 > ansible-playbook setup.yml -K
 
 ---
