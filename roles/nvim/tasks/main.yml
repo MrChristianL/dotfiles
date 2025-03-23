@@ -1,7 +1,6 @@
 --- 
-- name: "Install NvChad"
-  ansible.builtin.git:
-    repo: https://github.com/NvChad/starter
-    dest: ~/.config/nvim
-  become: no
-
+- include_tasks: "update-nvim.yml"
+- name: "Copy NvChad Config"
+  copy: 
+    src: "{{ role_path }}/files/nvim/"
+    dest: "{{ ansible_env.HOME}}/.config/tmux/"

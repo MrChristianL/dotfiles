@@ -3,6 +3,7 @@
     name:
       - flameshot
       - rsyslog
+      - ripgrep
     state: latest
   become: true
   become_method: sudo
