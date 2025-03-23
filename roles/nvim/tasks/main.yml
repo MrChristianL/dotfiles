@@ -3,4 +3,4 @@
 - name: "Copy NvChad Config"
   copy: 
     src: "{{ role_path }}/files/nvim/"
-    dest: "{{ ansible_env.HOME}}/.config/tmux/"
+    dest: "{{ ansible_env.HOME}}/.config/nvim/"
