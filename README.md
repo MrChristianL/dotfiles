@@ -1,3 +1,11 @@
+# VSCODE SETTINGS:
+---
+
+Theme: Simple Flat Dark (High Contrast)
+Icons: Flow Icons (Flow Dim)
+Font: JetBrainsMono Nerd Font
+Font Size: 16
+
 # ANSIBLE PLAYBOOK:
 ---
 
