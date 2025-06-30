@@ -1,7 +1,7 @@
 # VSCODE SETTINGS:
 ---
 
-Theme: Simple Flat Dark (High Contrast)
+Theme: One Dark Pro (One Dark Pro Night Flat)
 
 Icons: Flow Icons (Flow Dim)
 
